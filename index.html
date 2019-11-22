@@ -17,28 +17,59 @@
                 lastPeerId = peer.id;
             }
             document.getElementById("showid").innerHTML=peer.id
+            console.log("perperperperperperperperperperperperperper------open")
         });
 
         peer.on('connection', function (c) {
-            //alert("connect success")
+            alert("connect success")
+            if (conn) {
+                c.on('open', function() {
+                    c.send("Already connected to another client");
+                    setTimeout(function() { c.close(); }, 500);
+                });
+                return;
+            }
+            console.log("perperperperperperperperperperperperperper------connection")
+            conn = c //被连接时会获取到对方的通信对象
+            ready()
+        });
+        peer.on('disconnected', function () {
+            console.log("perperperperperperperperperperperperperper------disconnected")
+        });
+        peer.on('close', function() {
+            console.log("perperperperperperperperperperperperperper------close")
+        });
+        peer.on('error', function (err) {
+            console.log("perperperperperperperperperperperperperper------error")
         });
 
     }
 
     function connect()
     {
+        if (conn) {
+            conn.close();
+        }
+
         var id = document.getElementById("connectid").value
-        conn = peer.connect(id);
-        conn.on('open', function(){
-            // here you have conn.id
-            //conn.send('hi 111!');
+        conn = peer.connect(id, {  //连接时会获取对方id
+            reliable: true
         });
-        conn.on('error', function(){
-            alert("error")
+        ready()
+    }
+
+    function ready() {
+        if(conn==null)return
+        conn.on('open', function(){
+            console.log("conconconconconconconconconconcon------open")
         });
         conn.on('data', function(data){
             // here you have conn.id
-            alert(data)
+            //alert(data)
+            console.log("conconconconconconconconconconcon------data:"+data)
+        });
+        conn.on('close', function () {
+            console.log("conconconconconconconconconconcon------close")
         });
     }
 
