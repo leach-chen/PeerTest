@@ -1,0 +1,50 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/0.3.18/peer.min.js"></script>
+    <script>
+        var peer = null
+        var conn = null
+        function initialize() {
+            peer = new Peer(null, {
+                debug: 2
+            });
+            peer.on('open', function (id) {
+                document.getElementById("showid").innerHTML=peer.id
+            });
+
+            peer.on('connection', function (c) { //对方连接过来后会触发这里，会获取到对方的conn对象，读取对方发来的消息
+                alert("connect success")
+                conn = c
+                conn.on('data', function(data){
+                    alert("aa:"+data)
+                });
+            });
+        }
+
+        function connect()
+        {
+            var id = document.getElementById("connectid").value
+            conn = peer.connect(id, {  //连接成功后，会获取到对方的conn对象，读取对方发来的消息
+                reliable: true
+            });
+            conn.on('data', function(data){
+                alert("bb:"+data)
+            });
+        }
+
+        function send()
+        {
+            conn.send( document.getElementById("connectid").value)
+        }
+
+        initialize()
+    </script>
+
+</head>
+<button onclick="connect()">connect1</button>
+<button onclick="send()">Send</button>
+<p id="showid"></p>
+<input id="connectid"/>
+
+</body>
+</html>
