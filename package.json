@@ -1,0 +1,19 @@
+{
+  "name": "peerjs-samples",
+  "version": "1.0.0",
+  "description": "node server.js cnpm install serve-index cnpm install peer",
+  "main": "server.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.dev.sh.ctripcorp.com:junmingyang/peerjs-samples.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
