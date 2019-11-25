@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script>
+        let webclient = new WebSocket('ws://192.168.1.145:3000');
+        function sendM()
+        {
+            var str = document.getElementById("connectid").value
+            webclient.send(str)
+            // 接受消息
+            webclient.onmessage = function(message){
+                console.log(message)
+            }
+        }
+    </script>
+
+</head>
+<button onclick="sendM()">Send</button>
+<input id="connectid"/>
+
+</body>
+</html>
