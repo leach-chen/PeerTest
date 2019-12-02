@@ -2,7 +2,7 @@
   "name": "peerjs-samples",
   "version": "1.0.0",
   "description": "node server.js cnpm install serve-index cnpm install peer",
-  "main": "server.js",
+  "main": "js/server.js",
   "dependencies": {
   },
   "devDependencies": {},
